@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalcFaltas | Login e Cadastro</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id="titulo">Login</h1>
+    <form id="form">
+      <input type="text" id="nome" placeholder="Nome completo" style="display: none;">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="senha" placeholder="Senha" required>
+      <button type="submit" id="btnSubmit">Entrar</button>
+      <p class="alternar">Não tem conta? <a href="#" id="toggle">Cadastre-se</a></p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("form");
+    const toggle = document.getElementById("toggle");
+    const nomeInput = document.getElementById("nome");
+    const titulo = document.getElementById("titulo");
+    const botao = document.getElementById("btnSubmit");
+
+    let modoCadastro = false;
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      modoCadastro = !modoCadastro;
+      nomeInput.style.display = modoCadastro ? "block" : "none";
+      titulo.textContent = modoCadastro ? "Cadastro" : "Login";
+      botao.textContent = modoCadastro ? "Cadastrar" : "Entrar";
+      toggle.textContent = modoCadastro ? "Fazer login" : "Cadastre-se";
+    });
+
+    botao.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nome = nomeInput.value.trim();
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+
+      const rota = modoCadastro ? "/cadastro" : "/login";
+      const dados = modoCadastro ? { nome, email, senha } : { email, senha };
+
+      const resp = await fetch(`http://localhost:3000${rota}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      });
+
+      const data = await resp.json();
+      alert(data.mensagem);
+
+      if (resp.ok && !modoCadastro) {
+        window.location.href = "./dashboard.html";
+      }
+    });
+  </script>
+</body>
+</html>

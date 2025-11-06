@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Calculadora de Frequência</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1>Calculadora de Frequência</h1>
+    <div class="perfil">
+      <img src="https://i.pinimg.com/736x/07/c3/ad/07c3adf5b031e1768d87c0b0b3ab4300.jpg" alt="Perfil" />
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="disciplinasContainer" class="disciplinas-grid">
+      <!-- As disciplinas virão do JS -->
+    </div>
+
+    <button id="addDisciplinaBtn" class="botao-flutuante">+</button>
+  </main>
+
+  <!-- Modal para adicionar disciplina -->
+  <div id="modalDisciplina" class="modal">
+    <div class="modal-content">
+      <h2>Adicionar Disciplina</h2>
+      <input type="text" id="nomeUC" placeholder="Nome da disciplina" required />
+      <input type="number" id="cargaHoraria" placeholder="Carga horária total" required />
+      <input type="number" id="horasPorAula" placeholder="Horas por aula" required />
+      <input type="number" id="percentualLimite" placeholder="Limite de faltas (%)" required />
+      <input type="date" id="dataInicio" placeholder="Data de início" required />
+      <input type="date" id="dataTermino" placeholder="Data término (opcional)" />
+      <button id="salvarDisciplina" type="submit">Salvar</button>
+      <button id="fecharModal">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal para adicionar falta -->
+  <div id="modalFalta" class="modal">
+    <div class="modal-content">
+      <h2>Registrar Falta</h2>
+      <input type="date" id="dataFalta" required />
+      <input type="number" id="horasFalta" placeholder="Horas computadas" required />
+      <button id="salvarFalta" type="submit">Salvar</button>
+      <button id="fecharModalFalta">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="script/dashboard.js"></script>
+</body>
+</html>
